@@ -1,0 +1,36 @@
+<aside class="sidebar">
+  <!-- Logo -->
+  <div class="sidebar-logo">
+    <div class="logo-mark">H+</div>
+    <div>
+      <div class="logo-text">MediCare Pro</div>
+      <div class="logo-sub">Healthcare Management</div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="sidebar-nav">
+    <div class="nav-label">Navigation</div>
+    <a
+      *ngFor="let item of visibleNav"
+      [routerLink]="item.path"
+      class="nav-item"
+      [class.active]="currentRoute.startsWith(item.path)"
+    >
+      <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+      <span>{{ item.label }}</span>
+    </a>
+  </nav>
+
+  <!-- User -->
+  <div class="sidebar-user">
+    <div class="user-avatar">{{ userInitials }}</div>
+    <div class="user-info">
+      <div class="user-name">{{ user?.name }}</div>
+      <div class="user-role">{{ user?.role | titlecase }}</div>
+    </div>
+    <button mat-icon-button class="logout-btn" (click)="logout()" matTooltip="Logout">
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
+  </div>
+</aside>

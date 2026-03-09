@@ -1,0 +1,67 @@
+<div class="login-page">
+  <div class="login-card">
+    <!-- Logo -->
+    <div class="login-logo">H+</div>
+    <h1 class="login-title">MediCare Pro</h1>
+    <p class="login-sub">Hospital Appointment &amp; Patient Management System</p>
+
+    <!-- Role Tabs -->
+    <div class="role-tabs">
+      <button
+        *ngFor="let role of roles"
+        class="role-tab"
+        [class.active]="selectedRole === role"
+        (click)="selectRole(role)"
+        type="button"
+      >
+        {{ role | titlecase }}
+      </button>
+    </div>
+
+    <!-- Demo Hint -->
+    <div class="demo-hint">
+      <mat-icon style="font-size:14px;height:14px;width:14px;">info</mat-icon>
+      Click a role tab to auto-fill demo credentials
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email Address</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput type="email" formControlName="email" placeholder="you@example.com" autocomplete="email" />
+        <mat-error *ngIf="emailCtrl?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="emailCtrl?.hasError('email')">Enter a valid email address</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix>lock</mat-icon>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" autocomplete="current-password" />
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="passwordCtrl?.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="passwordCtrl?.hasError('minlength')">Minimum 4 characters</mat-error>
+      </mat-form-field>
+
+      <!-- Error message -->
+      <div class="error-msg" *ngIf="errorMessage">
+        <mat-icon>error_outline</mat-icon>
+        {{ errorMessage }}
+      </div>
+
+      <button
+        mat-raised-button
+        type="submit"
+        class="submit-btn"
+        [disabled]="loading"
+      >
+        <mat-spinner *ngIf="loading" diameter="18" style="margin-right:8px;"></mat-spinner>
+        {{ loading ? 'Signing in...' : 'Sign In as ' + (selectedRole | titlecase) }}
+        <mat-icon *ngIf="!loading" style="margin-left:6px;">arrow_forward</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>

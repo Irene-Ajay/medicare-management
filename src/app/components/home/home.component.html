@@ -1,0 +1,119 @@
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header mb-24">
+    <div>
+      <h2 class="page-title">{{ greeting }}, {{ (authService.currentUser?.name || 'User').split(' ')[0] }} 👋</h2>
+  <!-- Next Appointment Banner -->
+  <div class="next-appt-banner mb-24">
+    <div>
+      <h3 style="font-family:'Syne',sans-serif;font-weight:700;color:var(--white);margin-bottom:4px;">Next Appointment</h3>
+      <ng-container *ngIf="nextAppointment; else noAppt">
+        <p style="font-size:14px;color:var(--teal3);">
+          {{ getDoctorName(nextAppointment.doctorId) }} &bull; {{ nextAppointment.date | date:'mediumDate' }} at {{ nextAppointment.time }}
+        </p>
+        <p style="font-size:12px;color:var(--muted);margin-top:4px;">{{ nextAppointment.reason }}</p>
+      </ng-container>
+      <ng-template #noAppt>
+        <p style="font-size:14px;color:var(--muted);">No upcoming appointments scheduled</p>
+      </ng-template>
+    </div>
+    <a mat-raised-button routerLink="/doctors" class="btn-teal" style="text-decoration:none;">
+      <mat-icon>add</mat-icon> Book New
+    </a>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid mb-24">
+    <div class="stat-card blue">
+      <div class="stat-icon blue">📋</div>
+      <div>
+        <div class="stat-num">{{ stats.total }}</div>
+        <div class="stat-label">Total Appointments</div>
+        <div class="stat-change up">↑ All time</div>
+      </div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-icon green">✅</div>
+      <div>
+        <div class="stat-num">{{ stats.confirmed }}</div>
+        <div class="stat-label">Confirmed</div>
+        <div class="stat-change up">↑ On track</div>
+      </div>
+    </div>
+    <div class="stat-card purple">
+      <div class="stat-icon purple">⏳</div>
+      <div>
+        <div class="stat-num">{{ stats.pending }}</div>
+        <div class="stat-label">Pending Review</div>
+        <div class="stat-change">→ Awaiting doctor</div>
+      </div>
+    </div>
+    <div class="stat-card pink">
+      <div class="stat-icon pink">🏥</div>
+      <div>
+        <div class="stat-num">{{ stats.completed }}</div>
+        <div class="stat-label">Completed</div>
+        <div class="stat-change up">↑ This year</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two columns -->
+  <div class="dash-grid">
+    <!-- Recent Appointments -->
+    <div class="app-card">
+      <div class="section-header mb-16">
+        <span class="section-title">Recent Appointments</span>
+        <a routerLink="/dashboard" style="font-size:12px;color:var(--teal);text-decoration:none;">View all →</a>
+      </div>
+      <div *ngIf="loading" class="empty-state">
+        <p class="text-muted">Loading…</p>
+      </div>
+      <table *ngIf="!loading && recentAppointments.length > 0" class="appt-table">
+        <thead>
+          <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of recentAppointments">
+            <td>
+              <div style="font-weight:600;color:var(--white);font-size:14px;">{{ getDoctorName(a.doctorId) }}</div>
+              <div style="font-size:11px;color:var(--muted);">{{ getDoctorSpec(a.doctorId) }}</div>
+            </td>
+            <td style="font-size:13px;">{{ a.date | date:'mediumDate' }}</td>
+            <td>
+              <span class="badge" [ngClass]="'badge-' + a.status">
+                <span class="badge-dot"></span>{{ a.status | titlecase }}
+              </span>
+            </td>
+            <td style="font-weight:600;color:var(--teal2);">{{ a.fee | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!loading && recentAppointments.length === 0" class="empty-state">
+        <div class="icon">📅</div>
+        <h3>No appointments yet</h3>
+        <p>Book your first appointment with a doctor</p>
+      </div>
+    </div>
+
+    <!-- Top Doctors -->
+    <div class="app-card">
+      <div class="section-title mb-16">Available Doctors</div>
+      <div *ngFor="let doc of topDoctors" class="doctor-mini">
+        <div class="doc-mini-avatar" [style.background]="'rgba(14,165,233,0.15)'">
+          {{ doc.initials }}
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:600;color:var(--white);font-size:13px;">{{ doc.name }}</div>
+          <div style="font-size:11px;color:var(--muted);">{{ doc.specialization }}</div>
+        </div>
+        <div style="font-size:12px;color:#fbbf24;font-weight:600;">★ {{ doc.rating }}</div>
+      </div>
+    </div>
+  </div>
+</div>

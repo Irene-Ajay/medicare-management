@@ -1,0 +1,98 @@
+.page-header { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.page-title  { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:#0f172a; }
+
+.doc-info-badge { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.doc-badge-name     { font-size:14px; color:#0d9488; font-weight:600; }
+.doc-badge-hospital { font-size:12px; color:#64748b; }
+
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
+@media(max-width:900px) { .stats-row { grid-template-columns: repeat(2,1fr); } }
+
+.stat-card {
+  background: #ffffff; border: 1px solid rgba(13,148,136,0.12); border-radius: var(--r);
+  padding: 20px; display: flex; align-items: center; gap: 16px; position: relative; overflow: hidden;
+  box-shadow: 0 2px 8px rgba(13,148,136,0.06); transition: box-shadow 0.2s, transform 0.2s;
+}
+.stat-card:hover { box-shadow: 0 6px 20px rgba(13,148,136,0.12); transform: translateY(-1px); }
+.stat-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.stat-card.blue::before   { background:linear-gradient(90deg,#0d9488,#14b8a6); }
+.stat-card.purple::before { background:linear-gradient(90deg,#6366f1,#8b5cf6); }
+.stat-card.green::before  { background:linear-gradient(90deg,#059669,#10b981); }
+.stat-card.pink::before   { background:linear-gradient(90deg,#0891b2,#06b6d4); }
+.stat-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+.stat-icon.blue   { background:rgba(13,148,136,0.1); }
+.stat-icon.purple { background:rgba(99,102,241,0.1); }
+.stat-icon.green  { background:rgba(5,150,105,0.1); }
+.stat-icon.pink   { background:rgba(8,145,178,0.1); }
+.stat-num   { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:#0f172a; }
+.stat-label { font-size:12px; color:#64748b; margin-top:4px; }
+
+.doc-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:900px) { .doc-grid { grid-template-columns:1fr; } }
+
+.pending-badge {
+  background:#fef3c7; border:1px solid rgba(245,158,11,0.3);
+  border-radius:20px; padding:3px 10px; font-size:12px; color:#d97706; font-weight:600;
+}
+
+.request-row {
+  display:flex; align-items:flex-start; gap:12px;
+  padding:14px 0; border-bottom:1px solid rgba(13,148,136,0.1);
+}
+.request-row:last-child { border-bottom:none; }
+
+.req-avatar {
+  width:40px; height:40px; border-radius:10px;
+  background:linear-gradient(135deg,#0d9488,#0891b2);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:14px; color:white; flex-shrink:0;
+  box-shadow: 0 2px 8px rgba(13,148,136,0.25);
+}
+
+.req-info { flex:1; min-width:0; }
+.req-name   { font-size:14px; font-weight:600; color:#0f172a; }
+.req-detail { font-size:12px; color:#64748b; margin-top:2px; }
+.req-reason { margin-top:2px; }
+.req-actions { display:flex; flex-direction:column; gap:6px; flex-shrink:0; }
+
+.pill-accept {
+  display:flex; align-items:center; gap:4px;
+  background:#f0fdf4; border:1px solid rgba(16,185,129,0.3);
+  color:#059669; padding:5px 12px; border-radius:8px;
+  font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.pill-accept:hover { background:#dcfce7; }
+
+.pill-reject {
+  display:flex; align-items:center; gap:4px;
+  background:#fef2f2; border:1px solid rgba(239,68,68,0.25);
+  color:#ef4444; padding:5px 12px; border-radius:8px;
+  font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.pill-reject:hover { background:#fee2e2; }
+
+.pill-complete {
+  background:#f0fdfa; border:1px solid rgba(13,148,136,0.25);
+  color:#0d9488; padding:5px 12px; border-radius:8px;
+  font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.pill-complete:hover { background:#ccfbf1; }
+
+.schedule-row {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 0; border-bottom:1px solid rgba(13,148,136,0.1);
+}
+.schedule-row:last-child { border-bottom:none; }
+
+.sch-avatar {
+  width:40px; height:40px; border-radius:10px;
+  background:linear-gradient(135deg,#059669,#10b981);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:14px; color:white; flex-shrink:0;
+}
+
+.full-width { width:100%; }
+.mt-20 { margin-top:20px; }

@@ -1,0 +1,109 @@
+<div class="form-wrapper" [class.is-dialog]="isDialog">
+  <!-- Header -->
+  <div class="form-header">
+    <div>
+      <h2 class="form-title">Book Appointment</h2>
+      <p class="form-sub" *ngIf="doctor">{{ doctor.name }} &bull; {{ doctor.specialization }}</p>
+      <p class="form-sub" *ngIf="!doctor">Fill in the details to schedule an appointment</p>
+    </div>
+    <button *ngIf="isDialog" class="close-btn" type="button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Doctor Fee Info -->
+  <div class="fee-info" *ngIf="doctor">
+    <div class="fee-box blue">
+      <div class="fee-label">Consultation Fee</div>
+      <div class="fee-val">{{ doctor.fee | currency }}</div>
+    </div>
+    <div class="fee-box green">
+      <div class="fee-label">Experience</div>
+      <div class="fee-val">{{ doctor.experience }}</div>
+    </div>
+    <div class="fee-box purple">
+      <div class="fee-label">Rating</div>
+      <div class="fee-val">★ {{ doctor.rating }}</div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="appt-form" novalidate>
+
+    <!-- Doctor select (shown only when not pre-selected) -->
+    <mat-form-field *ngIf="!dialogData?.doctor && doctors.length > 0" appearance="outline" class="full-width">
+      <mat-label>Select Doctor</mat-label>
+      <mat-icon matPrefix>medical_services</mat-icon>
+      <mat-select formControlName="doctorId" (selectionChange)="onDoctorChange($event.value)">
+        <mat-option *ngFor="let d of doctors" [value]="d.id">{{ d.name }} – {{ d.specialization }}</mat-option>
+      </mat-select>
+      <mat-error>Please select a doctor</mat-error>
+    </mat-form-field>
+
+    <div class="form-grid">
+      <!-- Patient Name -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Full Name</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput formControlName="patientName" placeholder="Your full name" />
+        <mat-error *ngIf="f('patientName')?.hasError('required')">Name is required</mat-error>
+        <mat-error *ngIf="f('patientName')?.hasError('minlength')">Min 3 characters</mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput type="email" formControlName="email" placeholder="you@example.com" />
+        <mat-error *ngIf="f('email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="f('email')?.hasError('email')">Enter valid email</mat-error>
+      </mat-form-field>
+
+      <!-- Phone -->
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <mat-icon matPrefix>phone</mat-icon>
+        <input matInput formControlName="phone" placeholder="10-digit number" />
+        <mat-error *ngIf="f('phone')?.hasError('required')">Phone is required</mat-error>
+        <mat-error *ngIf="f('phone')?.hasError('pattern')">Enter valid 10-digit number</mat-error>
+      </mat-form-field>
+
+      <!-- Date -->
+      <mat-form-field appearance="outline">
+        <mat-label>Appointment Date</mat-label>
+        <mat-icon matPrefix>calendar_today</mat-icon>
+        <input matInput type="date" formControlName="date" [min]="today" />
+        <mat-error *ngIf="f('date')?.hasError('required')">Date is required</mat-error>
+      </mat-form-field>
+
+      <!-- Time Slot -->
+      <mat-form-field appearance="outline">
+        <mat-label>Time Slot</mat-label>
+        <mat-icon matPrefix>schedule</mat-icon>
+        <mat-select formControlName="time">
+          <mat-option *ngFor="let s of selectedSlots" [value]="s">{{ s }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f('time')?.hasError('required')">Select a time slot</mat-error>
+      </mat-form-field>
+
+      <!-- Reason -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Reason for Visit</mat-label>
+        <mat-icon matPrefix>description</mat-icon>
+        <textarea matInput formControlName="reason" rows="3" placeholder="Describe your symptoms or reason for visit…"></textarea>
+        <mat-error *ngIf="f('reason')?.hasError('required')">Reason is required</mat-error>
+        <mat-error *ngIf="f('reason')?.hasError('minlength')">Min 5 characters</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button *ngIf="isDialog" mat-stroked-button type="button" class="btn-outline" (click)="close()">Cancel</button>
+      <button mat-raised-button type="submit" class="btn-teal submit-btn" [disabled]="loading">
+        <mat-spinner *ngIf="loading" diameter="18" style="margin-right:8px;"></mat-spinner>
+        {{ loading ? 'Booking…' : 'Confirm Booking' }}
+        <mat-icon *ngIf="!loading">check_circle</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

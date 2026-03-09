@@ -1,0 +1,92 @@
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header mb-20">
+    <div>
+      <h2 class="page-title">Find Doctors</h2>
+      <p class="text-muted" style="font-size:14px;margin-top:4px;">
+        Browse {{ doctors.length }} specialists and find the right doctor for you
+      </p>
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar mb-20">
+    <div class="spec-select">
+      <mat-form-field appearance="outline" style="width:200px;">
+        <mat-label>Department</mat-label>
+        <mat-select [(ngModel)]="selectedSpec">
+          <mat-option *ngFor="let spec of specializations" [value]="spec">{{ spec }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="search-box">
+      <mat-icon style="color:var(--muted);font-size:18px;height:18px;width:18px;">search</mat-icon>
+      <input [(ngModel)]="searchTerm" placeholder="Search doctors, specializations..." />
+    </div>
+    <span class="text-muted" style="font-size:12px;white-space:nowrap;">{{ filteredCount }} results</span>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="empty-state">
+    <p class="text-muted">Loading doctors…</p>
+  </div>
+
+  <!-- Doctors Grid -->
+  <div *ngIf="!loading" class="doctors-grid">
+    <div
+      *ngFor="let doc of doctors | filterDoctors:selectedSpec:searchTerm"
+      class="doctor-card"
+      [class.top-rated]="doc.rating >= 4.9"
+    >
+      <!-- Top Rated Badge -->
+      <div *ngIf="doc.rating >= 4.9" class="top-badge">★ Top Rated</div>
+
+      <!-- Avatar -->
+      <div
+        class="doc-avatar"
+        [style.background]="'rgba(' + getSpecColor(doc.specialization).slice(1) + ', 0.15)'"
+        [style.border]="'1px solid ' + getSpecColor(doc.specialization) + '44'"
+      >
+        <span [style.color]="getSpecColor(doc.specialization)">{{ doc.initials }}</span>
+        <span class="avail-dot" [class.online]="doc.available" [class.offline]="!doc.available"></span>
+      </div>
+
+      <!-- Info -->
+      <div class="doc-name">{{ doc.name }}</div>
+      <span
+        class="doc-spec-badge"
+        [style.background]="getSpecColor(doc.specialization) + '22'"
+        [style.color]="getSpecColor(doc.specialization)"
+        [style.border]="'1px solid ' + getSpecColor(doc.specialization) + '44'"
+      >{{ doc.specialization }}</span>
+
+      <div class="doc-meta">
+        <span class="meta-item">⭐ <strong>{{ doc.rating }}</strong></span>
+        <span class="meta-item">💼 <strong>{{ doc.experience }}</strong></span>
+        <span class="meta-item">💰 <strong>{{ doc.fee | currency }}</strong></span>
+      </div>
+
+      <div class="slots-label">Available slots</div>
+      <div class="slots">
+        <span class="slot" *ngFor="let s of doc.slots">{{ s }}</span>
+      </div>
+
+      <button
+        mat-raised-button
+        class="book-btn"
+        [disabled]="!doc.available"
+        (click)="bookAppointment(doc)"
+      >
+        <mat-icon>event_available</mat-icon>
+        {{ doc.available ? 'Book Appointment' : 'Unavailable' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!loading && filteredCount === 0" class="empty-state">
+    <div class="icon">🔍</div>
+    <h3>No doctors found</h3>
+    <p>Try adjusting your filters or search term</p>
+  </div>
+</div>

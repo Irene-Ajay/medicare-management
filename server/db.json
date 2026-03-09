@@ -1,0 +1,295 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "patient123",
+      "role": "patient"
+    },
+    {
+      "id": 2,
+      "name": "Dr. Amelia Chen",
+      "email": "dr.chen@hospital.com",
+      "password": "doctor123",
+      "role": "doctor"
+    },
+    {
+      "id": 3,
+      "name": "Admin User",
+      "email": "admin@hospital.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": 4,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "password": "patient123",
+      "role": "patient"
+    }
+  ],
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Dr. Amelia Chen",
+      "specialization": "Cardiology",
+      "rating": 4.9,
+      "fee": 120,
+      "available": true,
+      "slots": [
+        "09:00",
+        "10:00",
+        "14:00",
+        "16:00"
+      ],
+      "experience": "12 yrs",
+      "hospital": "Central Medical",
+      "initials": "AC",
+      "phone": "9876543210",
+      "email": "dr.chen@hospital.com"
+    },
+    {
+      "id": 2,
+      "name": "Dr. Marcus Reid",
+      "specialization": "Neurology",
+      "rating": 4.7,
+      "fee": 150,
+      "available": true,
+      "slots": [
+        "08:00",
+        "11:00",
+        "13:00",
+        "15:00"
+      ],
+      "experience": "9 yrs",
+      "hospital": "North Health",
+      "initials": "MR",
+      "phone": "9876543211",
+      "email": "dr.reid@hospital.com"
+    },
+    {
+      "id": 3,
+      "name": "Dr. Priya Nair",
+      "specialization": "Orthopedics",
+      "rating": 4.8,
+      "fee": 100,
+      "available": false,
+      "slots": [
+        "10:00",
+        "12:00",
+        "17:00"
+      ],
+      "experience": "15 yrs",
+      "hospital": "City Clinic",
+      "initials": "PN",
+      "phone": "9876543212",
+      "email": "dr.nair@hospital.com"
+    },
+    {
+      "id": 4,
+      "name": "Dr. James Okafor",
+      "specialization": "Dermatology",
+      "rating": 4.6,
+      "fee": 90,
+      "available": true,
+      "slots": [
+        "09:00",
+        "11:00",
+        "14:00"
+      ],
+      "experience": "7 yrs",
+      "hospital": "Skin & Care",
+      "initials": "JO",
+      "phone": "9876543213",
+      "email": "dr.okafor@hospital.com"
+    },
+    {
+      "id": 5,
+      "name": "Dr. Sofia Martins",
+      "specialization": "Pediatrics",
+      "rating": 4.9,
+      "fee": 80,
+      "available": true,
+      "slots": [
+        "08:00",
+        "10:00",
+        "13:00",
+        "16:00"
+      ],
+      "experience": "11 yrs",
+      "hospital": "Children's Hosp.",
+      "initials": "SM",
+      "phone": "9876543214",
+      "email": "dr.martins@hospital.com"
+    },
+    {
+      "id": 6,
+      "name": "Dr. Leon Vasquez",
+      "specialization": "Oncology",
+      "rating": 4.8,
+      "fee": 200,
+      "available": true,
+      "slots": [
+        "09:00",
+        "12:00",
+        "15:00"
+      ],
+      "experience": "18 yrs",
+      "hospital": "Cancer Center",
+      "initials": "LV",
+      "phone": "9876543215",
+      "email": "dr.vasquez@hospital.com"
+    }
+  ],
+  "patients": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "9876543216",
+      "dob": "1990-05-15",
+      "gender": "Male",
+      "bloodGroup": "O+"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "phone": "9876543217",
+      "dob": "1985-08-22",
+      "gender": "Female",
+      "bloodGroup": "A+"
+    },
+    {
+      "id": 3,
+      "name": "Bob Wilson",
+      "email": "bob@example.com",
+      "phone": "9876543218",
+      "dob": "1975-11-30",
+      "gender": "Male",
+      "bloodGroup": "B+"
+    }
+  ],
+  "appointments": [
+    {
+      "id": 1,
+      "doctorId": 1,
+      "patientName": "John Doe",
+      "email": "john@example.com",
+      "phone": "9876543216",
+      "date": "2026-03-20",
+      "time": "09:00",
+      "status": "confirmed",
+      "reason": "Chest pain evaluation and ECG",
+      "fee": 120
+    },
+    {
+      "id": 2,
+      "doctorId": 5,
+      "patientName": "John Doe",
+      "email": "john@example.com",
+      "phone": "9876543216",
+      "date": "2026-03-25",
+      "time": "10:00",
+      "status": "pending",
+      "reason": "Annual child wellness checkup",
+      "fee": 80
+    },
+    {
+      "id": 3,
+      "doctorId": 2,
+      "patientName": "John Doe",
+      "email": "john@example.com",
+      "phone": "9876543216",
+      "date": "2026-02-28",
+      "time": "11:00",
+      "status": "completed",
+      "reason": "Migraine follow-up appointment",
+      "fee": 150
+    },
+    {
+      "id": 4,
+      "doctorId": 4,
+      "patientName": "Jane Smith",
+      "email": "jane@example.com",
+      "phone": "9876543217",
+      "date": "2026-03-18",
+      "time": "09:00",
+      "status": "pending",
+      "reason": "Skin rash examination",
+      "fee": 90
+    },
+    {
+      "id": 5,
+      "doctorId": 3,
+      "patientName": "Bob Wilson",
+      "email": "bob@example.com",
+      "phone": "9876543218",
+      "date": "2026-02-15",
+      "time": "12:00",
+      "status": "completed",
+      "reason": "Lower back pain consultation",
+      "fee": 100
+    },
+    {
+      "doctorId": 1,
+      "patientName": "Demo Patient",
+      "email": "john@example.com",
+      "phone": "2568426456",
+      "date": "2001-01-01",
+      "time": "09:00",
+      "reason": "cough",
+      "status": "pending",
+      "fee": 120,
+      "id": 6
+    }
+  ],
+  "medicalRecords": [
+    {
+      "id": 1,
+      "patientId": 1,
+      "date": "2026-02-28",
+      "doctor": "Dr. Marcus Reid",
+      "diagnosis": "Chronic Migraine",
+      "prescription": "Sumatriptan 50mg daily",
+      "notes": "Follow up in 3 weeks, avoid triggers"
+    },
+    {
+      "id": 2,
+      "patientId": 1,
+      "date": "2026-01-15",
+      "doctor": "Dr. Amelia Chen",
+      "diagnosis": "Hypertension Stage 1",
+      "prescription": "Lisinopril 10mg daily",
+      "notes": "Monitor blood pressure daily, low sodium diet"
+    },
+    {
+      "id": 3,
+      "patientId": 1,
+      "date": "2025-12-10",
+      "doctor": "Dr. Priya Nair",
+      "diagnosis": "Lower Back Strain",
+      "prescription": "Ibuprofen 400mg 3x/day",
+      "notes": "Rest and physiotherapy recommended"
+    },
+    {
+      "id": 4,
+      "patientId": 2,
+      "date": "2026-01-20",
+      "doctor": "Dr. James Okafor",
+      "diagnosis": "Eczema",
+      "prescription": "Hydrocortisone cream 1%",
+      "notes": "Avoid harsh soaps, moisturize daily"
+    },
+    {
+      "id": 5,
+      "patientId": 3,
+      "date": "2026-02-15",
+      "doctor": "Dr. Priya Nair",
+      "diagnosis": "Lumbar Disc Herniation",
+      "prescription": "Diclofenac 75mg twice daily",
+      "notes": "MRI scan scheduled, avoid heavy lifting"
+    }
+  ]
+}
