@@ -279,6 +279,18 @@
       "status": "pending",
       "fee": 120,
       "id": 9
+    },
+    {
+      "doctorId": 1,
+      "patientName": "Demo Patient",
+      "email": "john@example.com",
+      "phone": "2141413352",
+      "date": "0002-02-01",
+      "time": "09:00",
+      "reason": "dsm//.",
+      "status": "pending",
+      "fee": 120,
+      "id": 10
     }
   ],
   "medicalRecords": [

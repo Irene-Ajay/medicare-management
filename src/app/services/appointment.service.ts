@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
   private apiUrl = `${environment.apiUrl}/appointments`;
+  
 
   constructor(private http: HttpClient) {}
 

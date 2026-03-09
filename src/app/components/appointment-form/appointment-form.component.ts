@@ -86,6 +86,8 @@ export class AppointmentFormComponent implements OnInit {
     return this.doctor?.slots ?? [];
   }
 
+  
+
   onSubmit(): void {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     this.loading = true;
