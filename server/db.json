@@ -243,6 +243,18 @@
       "status": "pending",
       "fee": 120,
       "id": 6
+    },
+    {
+      "doctorId": 1,
+      "patientName": "Demo Patient",
+      "email": "john@example.com",
+      "phone": "1234567890",
+      "date": "2006-02-01",
+      "time": "10:00",
+      "reason": "Chest pain",
+      "status": "pending",
+      "fee": 120,
+      "id": 7
     }
   ],
   "medicalRecords": [

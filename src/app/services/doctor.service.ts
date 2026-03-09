@@ -6,7 +6,8 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class DoctorService {
-  private apiUrl = `${environment.apiUrl}/doctors`;
+  private apiUrl = 'https://medicare-api.onrender.com/doctors';
+  
 
   constructor(private http: HttpClient) {}
 
