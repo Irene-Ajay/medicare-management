@@ -29,7 +29,9 @@ server.post('/auth/login', (req, res) => {
   }
 });
 
+// Support both "/api/*" and legacy "/*" routes.
 server.use('/api', router);
+server.use(router);
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
@@ -38,11 +40,11 @@ server.listen(PORT, () => {
   console.log(`║  JSON Server running on port ${PORT}         ║`);
   console.log(`╚══════════════════════════════════════════╝\n`);
   console.log(`  API Endpoints:`);
-  console.log(`  GET    http://localhost:${PORT}/doctors`);
-  console.log(`  GET    http://localhost:${PORT}/patients`);
-  console.log(`  GET    http://localhost:${PORT}/appointments`);
-  console.log(`  POST   http://localhost:${PORT}/appointments`);
-  console.log(`  PATCH  http://localhost:${PORT}/appointments/:id`);
-  console.log(`  GET    http://localhost:${PORT}/medicalRecords`);
+  console.log(`  GET    http://localhost:${PORT}/api/doctors`);
+  console.log(`  GET    http://localhost:${PORT}/api/patients`);
+  console.log(`  GET    http://localhost:${PORT}/api/appointments`);
+  console.log(`  POST   http://localhost:${PORT}/api/appointments`);
+  console.log(`  PATCH  http://localhost:${PORT}/api/appointments/:id`);
+  console.log(`  GET    http://localhost:${PORT}/api/medicalRecords`);
   console.log(`  POST   http://localhost:${PORT}/auth/login\n`);
 });

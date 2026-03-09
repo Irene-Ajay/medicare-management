@@ -255,6 +255,30 @@
       "status": "pending",
       "fee": 120,
       "id": 7
+    },
+    {
+      "doctorId": 1,
+      "patientName": "Test User",
+      "time": "09:00",
+      "date": "2026-03-15",
+      "status": "pending",
+      "fee": 120,
+      "reason": "Fever check",
+      "phone": "1234567890",
+      "email": "test@example.com",
+      "id": 8
+    },
+    {
+      "doctorId": 1,
+      "patientName": "Demo Patient",
+      "email": "john@example.com",
+      "phone": "1234567890",
+      "date": "2008-02-01",
+      "time": "09:00",
+      "reason": "Chest pain",
+      "status": "pending",
+      "fee": 120,
+      "id": 9
     }
   ],
   "medicalRecords": [
