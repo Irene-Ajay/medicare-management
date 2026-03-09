@@ -11,6 +11,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { DoctorService } from '../../services/doctor.service';
 import { PatientService } from '../../services/patient.service';
 import { NotificationService } from '../../services/notification.service';
+import { AuthService } from '../../services/auth.service';
 import { Appointment } from '../../models/appointment.model';
 import { Doctor } from '../../models/doctor.model';
 import { MedicalRecord } from '../../models/patient.model';
@@ -41,6 +42,7 @@ export class PatientDashboardComponent implements OnInit {
     private doctorService: DoctorService,
     private patientService: PatientService,
     private notify: NotificationService,
+    private authService: AuthService,
     private dialog: MatDialog
   ) {}
 
@@ -53,7 +55,7 @@ export class PatientDashboardComponent implements OnInit {
       next: ({ appointments, doctors, records }) => {
         this.appointments = appointments;
         this.doctors = doctors;
-        this.medicalRecords = records;
+        this.medicalRecords = records.filter(r => r.patientId === this.authService.currentUser?.id);
         this.loading = false;
       },
       error: () => { this.loading = false; }
@@ -61,16 +63,26 @@ export class PatientDashboardComponent implements OnInit {
   }
 
   get upcoming(): Appointment[] {
-    return this.appointments.filter(a => a.status === 'pending' || a.status === 'confirmed');
+    const patientName = this.authService.currentUser?.name;
+    return this.appointments.filter(a => 
+      (a.status === 'pending' || a.status === 'confirmed') && 
+      a.patientName === patientName
+    );
   }
   get history(): Appointment[] {
-    return this.appointments.filter(a => a.status === 'completed' || a.status === 'cancelled');
+    const patientName = this.authService.currentUser?.name;
+    return this.appointments.filter(a => 
+      (a.status === 'completed' || a.status === 'cancelled') && 
+      a.patientName === patientName
+    );
   }
   get stats() {
+    const patientName = this.authService.currentUser?.name;
+    const patientAppointments = this.appointments.filter(a => a.patientName === patientName);
     return {
       upcoming:  this.upcoming.length,
       completed: this.history.filter(a => a.status === 'completed').length,
-      spent: this.appointments
+      spent: patientAppointments
         .filter(a => a.status === 'completed')
         .reduce((s, a) => s + a.fee, 0)
     };
